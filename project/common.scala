@@ -47,17 +47,17 @@ trait CommonBuildSetting{
           checkSnapshotDependencies,              // : ReleaseStep
           runTest,                                // : ReleaseStep
           setReleaseVersion,                      // : ReleaseStep
-          publishArtifacts                       // : ReleaseStep, checks whether `publishTo` is properly set up
-        )
+          publishArtifacts,                       // : ReleaseStep, checks whether `publishTo` is properly set up,
+          setNextVersion,                         // : ReleaseStep
+          commitNextVersion,                      // : ReleaseStep
+          pushChanges)
       }else{
         Seq(
           checkSnapshotDependencies,              // : ReleaseStep
           runTest,                                // : ReleaseStep
           setReleaseVersion,                      // : ReleaseStep
-          publishArtifacts,                       // : ReleaseStep, checks whether `publishTo` is properly set up,
-          setNextVersion,                         // : ReleaseStep
-          commitNextVersion,                      // : ReleaseStep
-          pushChanges)
+          publishArtifacts                       // : ReleaseStep, checks whether `publishTo` is properly set up
+        )
       }
     }
   })

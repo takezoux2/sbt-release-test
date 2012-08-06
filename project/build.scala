@@ -36,7 +36,6 @@ object HelloBuild extends Build {
         }else{
           Seq(
   checkSnapshotDependencies,              // : ReleaseStep
-  inquireVersions,                        // : ReleaseStep
   runTest,                                // : ReleaseStep
   setReleaseVersion,                      // : ReleaseStep
   publishArtifacts                       // : ReleaseStep, checks whether `publishTo` is properly set up
@@ -73,7 +72,6 @@ object HelloBuild extends Build {
         }else{
           Seq(
   checkSnapshotDependencies,              // : ReleaseStep
-  inquireVersions,                        // : ReleaseStep
   runTest,                                // : ReleaseStep
   setReleaseVersion,                      // : ReleaseStep
   publishArtifacts                       // : ReleaseStep, checks whether `publishTo` is properly set up

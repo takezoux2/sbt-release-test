@@ -19,6 +19,7 @@ object HelloBuild extends Build {
       //publishTo :=  Some("local" at "file://Users/takezoux3/program/scala/temp")
       publishTo := Some(Resolver.file("localMaven",Path.userHome / ".m2" / "repository")),
       releaseProcess <<= (scalaVersion)( v => {
+        println("scala version:" + v)
         if(v == mainScalaVersion){
           Seq(
   checkSnapshotDependencies,              // : ReleaseStep

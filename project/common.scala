@@ -1,5 +1,6 @@
 import sbt._
 import Keys._
+import sbtrelease._
 import sbtrelease.ReleasePlugin._
 import sbtrelease.ReleasePlugin.ReleaseKeys._
 import sbtrelease.ReleaseStateTransformations._
@@ -23,8 +24,11 @@ trait CommonBuildSetting{
         commitNextVersion,                      // : ReleaseStep
         pushChanges)
     },
-    tagName <<= (name,version)( (n,v) => n + "_" + v)
+    tagName <<= (name,version)( (n,v) => n + "_" + v),
+    nextVersion := { version => Version(version).map( _.bumpBugfix.asSnapshot.string).getOrElse(versionFormatError)}
   )
+  
+  
       
   lazy val switchPublishTo = (version){ version => {
     if(version.endsWith("SNAPSHOT")){

@@ -10,15 +10,7 @@ trait CommonBuildSetting{
   self : Build =>
   
   lazy val chabiReleaseSettings = releaseSettings ++ Seq(
-    releaseProcess <<= swithReleaseProcess,
-    tagName <<= (name,version)( (n,v) => n + "_" + v)
-  )
-  
-  val mainScalaVersion : String
-  
-   // to support cross compile
-  lazy val swithReleaseProcess = (crossScalaVersions,scalaVersion)( (versions,v) => {
-    if(versions.size == 1){
+    releaseProcess := {
       Seq(
         checkSnapshotDependencies,              // : ReleaseStep
         inquireVersions,                        // : ReleaseStep
@@ -26,41 +18,13 @@ trait CommonBuildSetting{
         setReleaseVersion,                      // : ReleaseStep
         commitReleaseVersion,                   // : ReleaseStep, performs the initial git checks
         tagRelease,                             // : ReleaseStep
-        publishArtifacts,                       // : ReleaseStep, checks whether `publishTo` is properly set up
+        //publishArtifacts,                     // skip  // : ReleaseStep, checks whether `publishTo` is properly set up
         setNextVersion,                         // : ReleaseStep
         commitNextVersion,                      // : ReleaseStep
         pushChanges)
-    }else {
-      val index = versions.indexOf(v)
-      if(index == 0){
-        Seq(
-         checkSnapshotDependencies,              // : ReleaseStep
-         inquireVersions,                        // : ReleaseStep
-         runTest,                                // : ReleaseStep
-         setReleaseVersion,                      // : ReleaseStep
-         commitReleaseVersion,                   // : ReleaseStep, performs the initial git checks
-         tagRelease,                             // : ReleaseStep
-         publishArtifacts                       // : ReleaseStep, checks whether `publishTo` is properly set up
-        )
-      }else if(index == versions.size - 1){
-        Seq(
-          checkSnapshotDependencies,              // : ReleaseStep
-          runTest,                                // : ReleaseStep
-          setReleaseVersion,                      // : ReleaseStep
-          publishArtifacts,                       // : ReleaseStep, checks whether `publishTo` is properly set up,
-          setNextVersion,                         // : ReleaseStep
-          commitNextVersion,                      // : ReleaseStep
-          pushChanges)
-      }else{
-        Seq(
-          checkSnapshotDependencies,              // : ReleaseStep
-          runTest,                                // : ReleaseStep
-          setReleaseVersion,                      // : ReleaseStep
-          publishArtifacts                       // : ReleaseStep, checks whether `publishTo` is properly set up
-        )
-      }
-    }
-  })
+    },
+    tagName <<= (name,version)( (n,v) => n + "_" + v)
+  )
       
   lazy val switchPublishTo = (version){ version => {
     if(version.endsWith("SNAPSHOT")){

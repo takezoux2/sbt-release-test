@@ -1,6 +1,7 @@
 import sbt._
 import Keys._
 import sbtrelease.ReleasePlugin._
+import sbtrelease.ReleasePlugin.ReleaseKeys._
 
 
 object HelloBuild extends Build {
@@ -11,6 +12,7 @@ object HelloBuild extends Build {
     settings = Project.defaultSettings ++ releaseSettings ++ Seq(
       organization := "com.geishatokyo",
       name := "root-project",
+      executableName := Some(s => "git.cmd"),
       //publishTo :=  Some("local" at "file://Users/takezoux3/program/scala/temp")
       publishTo := Some(Resolver.file("localMaven",Path.userHome / ".m2" / "repository"))
   
@@ -22,6 +24,7 @@ object HelloBuild extends Build {
     settings = Project.defaultSettings ++ releaseSettings ++  Seq(
       organization := "com.geishatokyo",
       name := "sub-project",
+      executableName := Some(s => "git.cmd"),
       //publishTo := Some("local" at "file://Users/takezoux3/program/scala/temp")
       publishTo := Some(Resolver.file("localMaven",Path.userHome / ".m2" / "repository"))
     )

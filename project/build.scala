@@ -11,7 +11,8 @@ object HelloBuild extends Build {
     settings = Project.defaultSettings ++ releaseSettings ++ Seq(
       organization := "com.geishatokyo",
       name := "root-project",
-      publishTo :=  Some("local" at "file://Users/takezoux3/program/scala/temp")
+      //publishTo :=  Some("local" at "file://Users/takezoux3/program/scala/temp")
+      publishTo := Some(Resolver.file("localMaven",Path.userHome / ".m2" / "repository"))
   
     ) 
   ) aggregate(subProject)
@@ -21,7 +22,8 @@ object HelloBuild extends Build {
     settings = Project.defaultSettings ++ releaseSettings ++  Seq(
       organization := "com.geishatokyo",
       name := "sub-project",
-      publishTo := Some("local" at "file://Users/takezoux3/program/scala/temp")
+      //publishTo := Some("local" at "file://Users/takezoux3/program/scala/temp")
+      publishTo := Some(Resolver.file("localMaven",Path.userHome / ".m2" / "repository"))
     )
   )
 

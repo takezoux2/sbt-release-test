@@ -11,8 +11,8 @@ object HelloBuild extends Build {
     settings = Project.defaultSettings ++ releaseSettings ++ Seq(
       organization := "com.geishatokyo",
       name := "root-project"  
-    )
-  )
+    ) 
+  ) aggregate(subProject)
 
   lazy val subProject = Project(id = "subproject",
     base = file("subp"),

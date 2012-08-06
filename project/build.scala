@@ -11,6 +11,7 @@ object HelloBuild extends Build {
     base = file("."),
     settings = Project.defaultSettings ++ releaseSettings ++ Seq(
       organization := "com.geishatokyo",
+      crossScalaVersions := List("2.9.1","2.9.0"),
       name := "root-project",
       executableName := Some(s => "git.cmd"),
       //publishTo :=  Some("local" at "file://Users/takezoux3/program/scala/temp")
@@ -23,6 +24,7 @@ object HelloBuild extends Build {
     base = file("subp"),
     settings = Project.defaultSettings ++ releaseSettings ++  Seq(
       organization := "com.geishatokyo",
+      crossScalaVersions := List("2.9.1","2.9.0"),
       name := "sub-project",
       executableName := Some(s => "git.cmd"),
       //publishTo := Some("local" at "file://Users/takezoux3/program/scala/temp")

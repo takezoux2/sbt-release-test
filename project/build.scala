@@ -10,7 +10,9 @@ object HelloBuild extends Build {
     base = file("."),
     settings = Project.defaultSettings ++ releaseSettings ++ Seq(
       organization := "com.geishatokyo",
-      name := "root-project"  
+      name := "root-project",
+      publishTo :=  Some("local" at "file://Users/takezoux3/program/scala/temp")
+  
     ) 
   ) aggregate(subProject)
 
@@ -18,7 +20,8 @@ object HelloBuild extends Build {
     base = file("subp"),
     settings = Project.defaultSettings ++ releaseSettings ++  Seq(
       organization := "com.geishatokyo",
-      name := "sub-project"
+      name := "sub-project",
+      publishTo := Some("local" at "file://Users/takezoux3/program/scala/temp")
     )
   )
 
